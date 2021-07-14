@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Accordian from "./components/Accordion";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
@@ -6,26 +6,51 @@ import Dropdown from "./components/Dropdown";
 const items = [
   {
     title: "What is React?",
-    content: "It is a front end javascript Framework",
+    content: "React is a front end javascript framework",
   },
   {
-    title: "Why react is so popular?",
-    content:
-      "ReactJS has become highly popular because of its extra simplicity and flexibility.",
+    title: "Why use React?",
+    content: "React is a favorite JS library among engineers",
   },
   {
-    title: "Why react hooks are bad?",
-    content:
-      "React uses lint rules and will throw errors to try to prevent developers from violating this detail of Hooks. ",
+    title: "How do you use React?",
+    content: "You use React by creating components",
+  },
+];
+
+const options = [
+  {
+    label: "The Color Red",
+    value: "red",
+  },
+  {
+    label: "The Color Green",
+    value: "green",
+  },
+  {
+    label: "A Shade of Blue",
+    value: "blue",
   },
 ];
 
 const App = () => {
+  const [selected, setSelected] = useState(options[0]);
+  const [showDropdown, setShowDropdown] = useState(true);
+
   return (
     <div>
       {/* <Accordian items={items} /> */}
       {/* <Search/> */}
-      <Dropdown/>
+      <button onClick={() => setShowDropdown(!showDropdown)}>
+        Toggle Dropdown
+      </button>
+      {showDropdown ? (
+        <Dropdown
+          selected={selected}
+          onSelectedChange={setSelected}
+          options={options}
+        />
+      ) : null}
     </div>
   );
 };
